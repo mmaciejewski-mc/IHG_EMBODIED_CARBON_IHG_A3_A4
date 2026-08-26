@@ -23,7 +23,7 @@
   }
   .container {
     width: 100%;
-    max-width: 980px;
+    max-width: 1200px;
     border: 0.5px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
@@ -118,6 +118,12 @@
     color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 4px;
+  }
+  .panel p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0 0 10px;
   }
   .panel .flag {
     display: inline-block;
@@ -473,7 +479,7 @@ const tabs = [
       <h3>Business context</h3>
       <ul>
         <li>The IHG team seeks a solution to reduce carbon footprints and improve the environmental and social impacts of IHG's hotels, through informed interior design and purchasing choices.</li>
-        <li>This analysis is a pilot for how embodied carbon data can inform those choices at the product and vendor level &mdash; starting with a single brand prototype room, with the intent that the same approach can extend to other rooms and brands.</li>
+        <li>This analysis is a pilot for how embodied carbon data can inform those choices at the product and vendor level &mdash; starting with a single brand prototype room, with the intent that the same approach can extend to other brands.</li>
       </ul>
 
       <h3>Objective statement</h3>
@@ -487,14 +493,18 @@ const tabs = [
     n: "Methodology",
     d: "How manufacturing and distribution emissions are collected, verified, and calculated for this analysis.",
     html: `
-      <h3>Why this approach, rather than EPDs</h3>
-      <ul>
-        <li>Mindclick measures embodied carbon at the factory (manufacturing) and distribution stages. This does not capture the raw material extraction stage.</li>
-        <li>Extraction is excluded because Environmental Product Declarations (EPDs) do not universally separate the extraction phase from manufacturing and distribution &mdash; there is no consistent, isolated extraction figure to draw from across vendors today.</li>
-        <li>Should IHG choose to move forward with a broader engagement, Mindclick would recommend a follow-on initiative to establish a standardized extraction estimate by product type, which could then be applied consistently across vendors.</li>
-        <li>The rationale for this approach: vendors within a given product category generally source similar raw materials to meet the same specification, so isolating factory and distribution data &mdash; where real differences between vendors actually show up &mdash; provides a more accurate basis for comparison than an extraction figure that would be largely the same across vendors regardless of who is chosen.</li>
-        <li>This approach is also significantly more scalable and less costly than obtaining an individual EPD for every vendor and product.</li>
-      </ul>
+      <h3>Why we scope to manufacturing and distribution</h3>
+      <p>Mindclick measures embodied carbon at the manufacturing (factory) and distribution stages &mdash; modules A3 and A4 in EN 15804 terms. Raw material extraction and supply (A1) is not quantified.</p>
+      <p>The reason is data availability, not relevance. EPDs almost universally declare raw material supply, inbound transport and manufacturing as a single aggregated A1&ndash;A3 cradle-to-gate figure. There is no isolated extraction value available consistently across vendors today.</p>
+      <p>Where vendors differ most at the extraction stage is in what the material actually is &mdash; recycled versus virgin content, certified versus uncertified sourcing. Mindclick captures that material data as part of the Mindclick Sustainability Assessment Program Assessment, so the vendor-differentiating dimension of extraction is reflected in the results even where the extraction emissions themselves are not separately quantified.</p>
+      <p>What sits outside the scope is the baseline extraction burden common to a product category. Because vendors within a category are generally producing to the same specification, that residual is the portion least likely to distinguish one vendor from another.</p>
+      <p>Should IHG choose to move forward with a broader engagement, Mindclick would recommend a follow-on initiative to establish a standardized extraction estimate by product type, applied consistently across vendors. That closes the gap without requiring vendor-by-vendor extraction data that does not exist today.</p>
+
+      <h3>Why this rather than product-specific EPDs</h3>
+      <p>Mindclick's manufacturing figures come from primary, vendor-reported production data rather than published declarations. Figures are specific to the actual supplier and current, rather than dependent on whether a vendor has commissioned an EPD and when.</p>
+      <p>EPD coverage across FF&E and OS&E categories remains thin. Commissioning product-specific EPDs across a hospitality supply base costs thousands to tens of thousands of dollars per product and takes months each &mdash; cost borne by vendors and ultimately priced back into IHG's spend.</p>
+      <p>Where a vendor holds a current EPD, Mindclick can use it if preferred by IHG. This approach is not a rejection of EPDs; it is a way to achieve comparable coverage across a full vendor set rather than partial coverage limited to vendors who have already invested in declarations.</p>
+      <p>The result is a consistent, scalable basis for comparing vendors within a category across the supply base. It is built for procurement decisions and vendor comparison &mdash; not as a substitute for a full Scope 3 Category 1 inventory or a whole-building LCA, both of which require complete cradle-to-gate (A1&ndash;A3) data.</p>
 
       <h3>How manufacturing emissions data is collected</h3>
       <ul>
