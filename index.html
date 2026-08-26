@@ -698,7 +698,7 @@ function renderSourceDataTab() {
       if (vendorFilter && r.VENDOR_NAME !== vendorFilter) return false;
       if (statusFilter && r.MSAP_AFFILIATED !== statusFilter) return false;
       if (q) {
-        const hay = (r.CATEGORY + ' ' + r.VENDOR_NAME + ' ' + r.FACILITY_NAME).toLowerCase();
+        const hay = (displayCat(r.CATEGORY) + ' ' + r.VENDOR_NAME + ' ' + r.FACILITY_NAME).toLowerCase();
         if (!hay.includes(q)) return false;
       }
       return true;
@@ -706,7 +706,7 @@ function renderSourceDataTab() {
     const tbody = document.getElementById('sd-tbody');
     tbody.innerHTML = filtered.map(r =>
       '<tr>' +
-        '<td class="wrap">' + r.CATEGORY + '</td>' +
+        '<td class="wrap">' + displayCat(r.CATEGORY) + '</td>' +
         '<td class="wrap">' + r.VENDOR_NAME + '</td>' +
         '<td>' + badgeForStatus(r.MSAP_AFFILIATED) + '</td>' +
         '<td class="wrap">' + r.FACILITY_NAME + '</td>' +
@@ -730,6 +730,14 @@ function toNum(v) {
   if (v === undefined || v === null || v === '' || v === '-') return null;
   const n = Number(v);
   return isNaN(n) ? null : n;
+}
+
+// The raw exported data still says "Softgoods" (that's the literal Snowflake
+// category name) -- this renames it for display only, wherever a raw
+// category string is shown to the user. Underlying data/filtering logic is
+// untouched so nothing else in the app breaks.
+function displayCat(c) {
+  return c === 'Softgoods' ? 'Seating' : c;
 }
 
 // "Best"/"Baseline" should reflect lowest/highest TOTAL embodied carbon for
@@ -830,7 +838,7 @@ function renderPriorityCategoriesTab(tabIndex) {
     const skus = allSkus.slice().sort((a, b) => (b.hasData - a.hasData) || (b.kg - a.kg));
     const skuRows = skus.map(s => {
       if (!s.hasData) {
-        return `<tr><td>${s.name}</td><td>&mdash;</td><td>${s.cat}</td><td><span class="opt-badge nodata">No usable data</span></td><td></td></tr>`;
+        return `<tr><td>${s.name}</td><td>&mdash;</td><td>${displayCat(s.cat)}</td><td><span class="opt-badge nodata">No usable data</span></td><td></td></tr>`;
       }
       skuRowCounter++;
       const rowId = 'pc-sku-' + skuRowCounter;
@@ -868,7 +876,7 @@ function renderPriorityCategoriesTab(tabIndex) {
       return `<tr class="sku-toggle-row" data-toggle="${rowId}-detail" style="cursor:pointer;">
           <td>${s.name}</td>
           <td>${s.vendor} <span style="color:var(--text-muted); font-size:11px;">(${usedCount} of ${allFacilities.length} facilities used &#9662;)</span></td>
-          <td>${s.cat}</td>
+          <td>${displayCat(s.cat)}</td>
           <td>${s.kg.toFixed(2)} kg</td>
           <td></td>
         </tr>${facDetailHtml}`;
@@ -1148,7 +1156,7 @@ function renderResultsTab(tabIndex) {
       <div class="cat-row" data-cat-idx="${i}">
         <div class="cat-row-main">
           <span class="rank">${i + 1}</span>
-          <span class="name">${cat}<br><span style="font-size:11px; color:var(--text-muted); font-weight:400;">${area.toFixed(1)} sq ft (${areaP.toFixed(1)}% of room)</span></span>
+          <span class="name">${displayCat(cat)}<br><span style="font-size:11px; color:var(--text-muted); font-weight:400;">${area.toFixed(1)} sq ft (${areaP.toFixed(1)}% of room)</span></span>
           ${hasAnyData ? `
           <div class="cat-stack-track">
             <div class="a3" style="width:${pct(a3,total)}%"></div>
