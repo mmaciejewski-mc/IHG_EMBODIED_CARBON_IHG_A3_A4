@@ -129,21 +129,29 @@
     margin-left: 4px;
   }
   .sd-stats {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-    padding-bottom: 16px;
-    border-bottom: 0.5px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .sd-stat {
+    background: var(--surface-0);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--sd-accent, #003E32);
+    border-radius: 10px;
+    padding: 14px 16px;
   }
   .sd-stat .num {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 28px;
+    font-weight: 700;
     color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: 4px;
   }
   .sd-stat .label {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--text-secondary);
+    line-height: 1.4;
   }
   .sd-controls {
     display: flex;
@@ -1265,11 +1273,11 @@ function renderProgramCoverageTab(tabIndex) {
 
   const statsHtml =
     '<div class="sd-stats">' +
-      '<div class="sd-stat"><div class="num">' + totalVendors + '</div><div class="label">vendors in this room\'s BOM</div></div>' +
-      '<div class="sd-stat"><div class="num">' + Math.round(100 * vendorsInProgram / totalVendors) + '%</div><div class="label">of vendors with current or historical data in Mindclick\'s program</div></div>' +
-      '<div class="sd-stat"><div class="num">' + totalFacilities + '</div><div class="label">total facilities across those vendors</div></div>' +
-      '<div class="sd-stat"><div class="num">' + Math.round(100 * vendorsWithAnyData / totalVendors) + '%</div><div class="label">of vendors in the BOM with usable data</div></div>' +
-      '<div class="sd-stat"><div class="num">' + Math.round(100 * totalFacilitiesWithData / totalFacilities) + '%</div><div class="label">of facilities for vendors in Mindclick\'s program with usable data</div></div>' +
+      '<div class="sd-stat" style="--sd-accent:#003E32;"><div class="num">' + totalVendors + '</div><div class="label">vendors in this room\'s BOM</div></div>' +
+      '<div class="sd-stat" style="--sd-accent:#98B6E4;"><div class="num">' + Math.round(100 * vendorsInProgram / totalVendors) + '%</div><div class="label">of vendors with current or historical data in Mindclick\'s program</div></div>' +
+      '<div class="sd-stat" style="--sd-accent:#003E32;"><div class="num">' + totalFacilities + '</div><div class="label">total facilities across those vendors</div></div>' +
+      '<div class="sd-stat" style="--sd-accent:#98B6E4;"><div class="num">' + Math.round(100 * vendorsWithAnyData / totalVendors) + '%</div><div class="label">of vendors in the BOM with usable data</div></div>' +
+      '<div class="sd-stat" style="--sd-accent:#98B6E4;"><div class="num">' + Math.round(100 * totalFacilitiesWithData / totalFacilities) + '%</div><div class="label">of facilities for vendors in Mindclick\'s program with usable data</div></div>' +
     '</div>';
 
   const tableHtml =
